@@ -1,7 +1,15 @@
 # DuckDB pprof extension
 
+### Build
+```
+make configure
+make debug
+```
+
+### Test
+
 ```sql
-D LOAD '/usr/src/duckdb-extension-pprof/build/debug/quack_pprof.duckdb_extension';
+D LOAD './build/debug/quack_pprof.duckdb_extension';
 D SELECT * FROM trace_start();
 ┌──────────────────────────────────────────────────┐
 │                      status                      │
@@ -9,13 +17,8 @@ D SELECT * FROM trace_start();
 ├──────────────────────────────────────────────────┤
 │ Profiling started with signal-safe configuration │
 └──────────────────────────────────────────────────┘
-D SELECT 1;
-┌───────┐
-│   1   │
-│ int32 │
-├───────┤
-│     1 │
-└───────┘
+
+--- Perform some actions...
 D SELECT version();
 ┌─────────────┐
 │ "version"() │
@@ -23,6 +26,8 @@ D SELECT version();
 ├─────────────┤
 │ v1.1.3      │
 └─────────────┘
+
+--- Check for results
 D SELECT * FROM trace_results();
 ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │                                                                  stack_trace                                                                  │
@@ -30,6 +35,8 @@ D SELECT * FROM trace_results();
 ├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ FRAME: backtrace::backtrace::libunwind::trace -> backtrace::backtrace::trace_unsynchronized -> FRAME: <pprof::backtrace::backtrace_rs::Trac…  │
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+--- Dump to pprof protobuf file
 D SELECT * FROM trace_stop('duckdb.pprof');
 ┌───────────────────────────────┐
 │            status             │
