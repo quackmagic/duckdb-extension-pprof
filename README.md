@@ -45,3 +45,7 @@ D SELECT * FROM trace_stop('duckdb.pprof');
 │ Profile saved to duckdb.pprof │
 └───────────────────────────────┘
 ```
+
+### Output
+![image](https://github.com/user-attachments/assets/1ded4e67-9a63-4c52-a0b4-f6fbbb271e94)
+
