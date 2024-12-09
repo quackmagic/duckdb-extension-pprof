@@ -4,6 +4,8 @@
 name: Main Extension Distribution Pipeline
 on:
   push:
+    paths-ignore:
+      - '**.md'
   pull_request:
   workflow_dispatch:
 
@@ -20,4 +22,4 @@ jobs:
       ci_tools_version: main
       extension_name: quack_pprof
       extra_toolchains: rust;python3
-      exclude_archs: 'windows_amd64_rtools'
+      exclude_archs: 'windows_amd64_rtools;windows_amd64;wasm_threads;wasm_eh;wasm_mvp;'
